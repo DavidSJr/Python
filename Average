@@ -1,0 +1,79 @@
+"""Here we define what scores each video game got from 3 different game reviewing game sites.
+There are a total of 3 video games. The first number represents the sites official rating system and
+the second number represents the User Rating system."""
+
+Battlefield_4 = {
+    "Name": "Battlefield 4",
+    "GameSpot": [80, 75],
+    "GameTrailers": [95, 88],
+    "IGN": [80, 90]
+}
+Grand_Theft_Auto_V = {
+    "Name": "Grand Theft Auto V",
+    "GameSpot": [90, 90],
+    "GameTrailers": [98, 61],
+    "IGN": [100, 100]
+}
+Batman_Arkham_Knight = {
+    "Name": "Batman: Arkham Knight",
+    "GameSpot": [70, 79],
+    "GameTrailers": [90, 94],
+    "IGN": [92, 95]
+}
+
+"""The below function called "average" has an argument called "numbers". Inside this function, it has the built-in function "sum()"
+with the numbers list as a parameter. The result will be stored in the "total" variable. Then we divide "total" by the length of the
+"numbers" list. "len()" calculates that length."""
+
+def average(numbers):  
+    total = sum(numbers)
+    total = total / len(numbers)
+    return total
+
+"""The "get_average" function has an argument of "game". The "GameSpot" variable stores the average of "game["GameSpot"].
+The same goes for the GameTrailers and IGN variables. We then multiply the 3 averages by their weights return the sum"""
+
+def get_average(game):
+    GameSpot = average(game["GameSpot"])
+    GameTrailers = average(game["GameTrailers"])
+    IGN = average(game["IGN"])
+    
+    return .33 * average(game["GameSpot"]) + .33 * average(game["GameTrailers"]) + .33 * average(game["IGN"])
+
+"""In order to get a letter grade, here we write a chain of "elif" statements, inside the get_letter_grade function.
+If the average number for these three games is equal to or above 90, it gets an "A", so on and so forth."""
+
+def get_letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+    
+"""The "get_games_average" function has an argument of "games". The empty "results" list gets filled in with ".append" once
+"get_average(game)" gets calculated. Then, we return the result of calling "average()" with "results"."""
+
+def get_games_average(games):
+    results = []
+
+    for game in games:
+        results.append(get_average(game))
+        return average(results)
+        
+"""The "games" variable shows what games should define it."""
+
+games = [Battlefield_4, Grand_Theft_Auto_V, Batman_Arkham_Knight]
+
+"""Finally, we print out the result of calling "get_games_average" with the "games" list found above. Then we also print the result
+of "get_letter_grade" for the games's average."""
+
+print "Number grade:"
+print get_games_average(games)
+print games
+print "Average letter grade:"
+print get_letter_grade(get_games_average(games))
